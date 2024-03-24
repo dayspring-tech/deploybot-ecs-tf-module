@@ -19,7 +19,7 @@ resource "aws_iam_policy" "cloudfront_cache_processing" {
           "cloudfront:ListDistributions"
         ],
         "Resource": [
-          data.aws_cloudfront_distribution.distribution.arn
+          data.aws_cloudfront_distribution.distribution[0].arn
         ]
       }
     ]
@@ -45,7 +45,7 @@ resource "aws_iam_role" "deploy_automation" {
   })
   managed_policy_arns = concat(
     ["arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"],
-    var.cloudfront_distribution_id != null ? [aws_iam_policy.cloudfront_cache_processing.arn] : []
+    var.cloudfront_distribution_id != null ? [aws_iam_policy.cloudfront_cache_processing[0].arn] : []
   )
   name = "${var.app_name}_deploy_automation-${var.environment}"
   path = "/service-role/"
