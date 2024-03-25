@@ -20,15 +20,15 @@ resource "aws_security_group" "deployment_automation" {
 
 data "archive_file" "lambda_helper_functions_archive" {
   type        = "zip"
-  output_path = "./lambda-python/helper-functions.zip"
-  source_file = "./lambda-python/helper-functions/function.py"
+  output_path = "${path.module}/lambda-python/helper-functions.zip"
+  source_file = "${path.module}/lambda-python/helper-functions/function.py"
 }
 
 
 resource "aws_lambda_function" "deployment_automation" {
   function_name = "${var.app_name}-${var.environment}-deployment-automation"
   handler = "function.deployment_automation"
-  filename = "./lambda-python/helper-functions.zip"
+  filename = "${path.module}/lambda-python/helper-functions.zip"
   memory_size      = 128
   role = aws_iam_role.deploy_automation.arn
   runtime = "python3.11"
