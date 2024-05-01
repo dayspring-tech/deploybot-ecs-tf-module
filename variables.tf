@@ -8,6 +8,7 @@ variable "environment" {
 
 variable "cloudfront_distribution_id" {
   description = "Distribution ID of the CloudFront distribution to create an invalidation for"
+  default = null
 }
 
 variable "ecs_service_id" {
