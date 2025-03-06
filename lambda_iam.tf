@@ -52,7 +52,7 @@ resource "aws_iam_role_policy_attachment" "deploy_automation_vpc_exec" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
 }
 
-resource "aws_iam_role_policy_attachment" "deploy_automation_vpc_exec" {
+resource "aws_iam_role_policy_attachment" "deploy_automation_cloudfront" {
   count      = var.cloudfront_distribution_id != null ? 1 : 0
   role       = aws_iam_role.deploy_automation.name
   policy_arn = aws_iam_policy.cloudfront_cache_processing[0].arn
